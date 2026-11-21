@@ -12,6 +12,9 @@ NET="${TAG}-net"
 PG="${TAG}-pg"
 POOLER="${TAG}-pgbouncer"
 CONFIG="$(mktemp -d "${TMPDIR:-/tmp}/project-scope-pgbouncer-XXXXXX")"
+# mktemp -d creates 0700: the pooler user in the container could not read the mounted
+# config (seen as a missing userlist.txt) on Linux, where bind mounts keep host permissions.
+chmod 755 "${CONFIG}"
 cleanup() {
   docker rm -f -v "${PG}" "${POOLER}" >/dev/null 2>&1 || true
   docker network rm "${NET}" >/dev/null 2>&1 || true
