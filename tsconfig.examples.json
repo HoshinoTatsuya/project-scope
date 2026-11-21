@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "noEmit": true,
+    "types": ["node", "jest"],
+    "paths": {
+      "@hoshinotatsuya/project-scope": ["./src/index.ts"],
+      "@hoshinotatsuya/project-scope/drizzle": ["./src/drizzle.ts"],
+      "@hoshinotatsuya/project-scope/gate": ["./src/gate.ts"],
+      "@hoshinotatsuya/project-scope/gate/jest": ["./src/gate-jest.ts"]
+    }
+  },
+  "include": ["examples"]
+}

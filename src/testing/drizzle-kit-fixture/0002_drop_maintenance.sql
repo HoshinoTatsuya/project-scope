@@ -1,0 +1,1 @@
+DROP POLICY "scope_app_project_id_maintenance" ON "items" CASCADE;

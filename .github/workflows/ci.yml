@@ -1,0 +1,94 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: check (PostgreSQL ${{ matrix.postgres }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        postgres: ['15', '16', '17', '18']
+    # The suite needs a real PostgreSQL; scripts/with-postgres.sh uses PG_TEST_URL when it is set.
+    services:
+      postgres:
+        image: postgres:${{ matrix.postgres }}-alpine
+        env:
+          POSTGRES_USER: test
+          POSTGRES_PASSWORD: test
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U test -d postgres"
+          --health-interval 2s
+          --health-timeout 5s
+          --health-retries 30
+    env:
+      PG_TEST_URL: postgres://test:test@localhost:5432/postgres
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run typecheck
+      - run: pnpm run lint
+      - run: pnpm test
+      - run: pnpm run build
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jest-report-pg${{ matrix.postgres }}
+          path: .jest-report.json
+          if-no-files-found: ignore
+          retention-days: 7
+
+  stands:
+    # Docker stands started by the scripts themselves: a hot standby (streaming replication) and
+    # PgBouncer in transaction mode in front of PostgreSQL.
+    name: ${{ matrix.suite }} (PostgreSQL ${{ matrix.postgres }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        suite: ['test:replica', 'test:pgbouncer']
+        postgres: ['16', '17', '18']
+        include:
+          - suite: 'test:pgbouncer'
+            postgres: '15'
+    env:
+      PG_TEST_IMAGE: postgres:${{ matrix.postgres }}-alpine
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run ${{ matrix.suite }}
+
+  consumers:
+    # The packed build installed into throwaway consumer projects (commonjs, node16, nodenext,
+    # bundler+ESM, nodenext+ESM): tsc, runtime entries, ts-jest for /gate/jest.
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run test:consumers

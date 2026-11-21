@@ -1,0 +1,290 @@
+[
+  {
+    "tool": "golang-migrate",
+    "version": "4.18.3",
+    "case": "down-only",
+    "exitCode": 0,
+    "applied": ["1_a.up.sql", "3_c.up.sql"],
+    "failure": null
+  },
+  {
+    "tool": "golang-migrate",
+    "version": "4.18.3",
+    "case": "duplicate-padded",
+    "exitCode": 1,
+    "applied": [],
+    "failure": "error: failed to open source, \"file:///migrations\": duplicate migration file: 1_a.up.sql"
+  },
+  {
+    "tool": "golang-migrate",
+    "version": "4.18.3",
+    "case": "empty-name",
+    "exitCode": 0,
+    "applied": ["1_.up.sql", "2_b.up.sql"],
+    "failure": null
+  },
+  {
+    "tool": "golang-migrate",
+    "version": "4.18.3",
+    "case": "extension",
+    "exitCode": 0,
+    "applied": ["1_a.up.sql", "2_b.up.SQL", "3_c.up.psql", "4_d.up.sql.bak"],
+    "failure": null
+  },
+  {
+    "tool": "golang-migrate",
+    "version": "4.18.3",
+    "case": "huge-version",
+    "exitCode": 0,
+    "applied": ["1_a.up.sql"],
+    "failure": null
+  },
+  {
+    "tool": "golang-migrate",
+    "version": "4.18.3",
+    "case": "numeric-order",
+    "exitCode": 0,
+    "applied": ["1_a.up.sql", "2_b.up.sql", "9_d.up.sql", "10_c.up.sql"],
+    "failure": null
+  },
+  {
+    "tool": "golang-migrate",
+    "version": "4.18.3",
+    "case": "prefix-junk",
+    "exitCode": 0,
+    "applied": ["1_a.up.sql"],
+    "failure": null
+  },
+  {
+    "tool": "golang-migrate",
+    "version": "4.18.3",
+    "case": "subdirectory",
+    "exitCode": 0,
+    "applied": ["1_a.up.sql"],
+    "failure": null
+  },
+  {
+    "tool": "golang-migrate",
+    "version": "4.18.3",
+    "case": "uppercase-direction",
+    "exitCode": 0,
+    "applied": ["1_a.up.sql"],
+    "failure": null
+  },
+  {
+    "tool": "dbmate",
+    "version": "dbmate version 2.38.1",
+    "case": "backup-suffix",
+    "exitCode": 0,
+    "applied": ["1_a.sql"],
+    "failure": null
+  },
+  {
+    "tool": "dbmate",
+    "version": "dbmate version 2.38.1",
+    "case": "down-before-up",
+    "exitCode": 2,
+    "applied": [],
+    "failure": "Error: dbmate does not support statements preceding the '-- migrate:up' block"
+  },
+  {
+    "tool": "dbmate",
+    "version": "dbmate version 2.38.1",
+    "case": "duplicate-padded",
+    "exitCode": 0,
+    "applied": ["01_b.sql", "1_a.sql"],
+    "failure": null
+  },
+  {
+    "tool": "dbmate",
+    "version": "dbmate version 2.38.1",
+    "case": "duplicate",
+    "exitCode": 2,
+    "applied": ["1_a.sql"],
+    "failure": "Error: pq: duplicate key value violates unique constraint \"schema_migrations_pkey\" (23505)"
+  },
+  {
+    "tool": "dbmate",
+    "version": "dbmate version 2.38.1",
+    "case": "extension",
+    "exitCode": 0,
+    "applied": ["1_a.sql"],
+    "failure": null
+  },
+  {
+    "tool": "dbmate",
+    "version": "dbmate version 2.38.1",
+    "case": "indented-marker",
+    "exitCode": 2,
+    "applied": [],
+    "failure": "Error: dbmate requires each migration to define an up block with '-- migrate:up'"
+  },
+  {
+    "tool": "dbmate",
+    "version": "dbmate version 2.38.1",
+    "case": "no-marker",
+    "exitCode": 2,
+    "applied": [],
+    "failure": "Error: dbmate requires each migration to define an up block with '-- migrate:up'"
+  },
+  {
+    "tool": "dbmate",
+    "version": "dbmate version 2.38.1",
+    "case": "no-underscore",
+    "exitCode": 0,
+    "applied": ["20240101.sql", "20240102abc.sql"],
+    "failure": null
+  },
+  {
+    "tool": "dbmate",
+    "version": "dbmate version 2.38.1",
+    "case": "prefix-junk",
+    "exitCode": 0,
+    "applied": ["1_a.sql"],
+    "failure": null
+  },
+  {
+    "tool": "dbmate",
+    "version": "dbmate version 2.38.1",
+    "case": "string-order",
+    "exitCode": 0,
+    "applied": ["0_a.sql", "10_c.sql", "11_d.sql", "2_b.sql", "9_e.sql"],
+    "failure": null
+  },
+  {
+    "tool": "dbmate",
+    "version": "dbmate version 2.38.1",
+    "case": "subdirectory",
+    "exitCode": 0,
+    "applied": ["1_a.sql"],
+    "failure": null
+  },
+  {
+    "tool": "dbmate",
+    "version": "dbmate version 2.38.1",
+    "case": "version-vs-name",
+    "exitCode": 0,
+    "applied": ["10_a.sql", "1_b.sql", "2_c.sql"],
+    "failure": null
+  },
+  {
+    "tool": "flyway",
+    "version": "Flyway OSS Edition 11.20.3 by Redgate",
+    "case": "backup-suffix",
+    "exitCode": 0,
+    "applied": ["V1__a.sql"],
+    "failure": null
+  },
+  {
+    "tool": "flyway",
+    "version": "Flyway OSS Edition 11.20.3 by Redgate",
+    "case": "callback",
+    "exitCode": 0,
+    "applied": ["V1__a.sql", "afterMigrate.sql"],
+    "failure": null
+  },
+  {
+    "tool": "flyway",
+    "version": "Flyway OSS Edition 11.20.3 by Redgate",
+    "case": "duplicate-padded",
+    "exitCode": 1,
+    "applied": [],
+    "failure": "Database: jdbc:postgresql://layout-oracle-pg-63069:5432/oracle_flyway_duplicate_padded (PostgreSQL 17.11) | ERROR: Found more than one migration with version 01"
+  },
+  {
+    "tool": "flyway",
+    "version": "Flyway OSS Edition 11.20.3 by Redgate",
+    "case": "duplicate-subdirectory",
+    "exitCode": 1,
+    "applied": [],
+    "failure": "Database: jdbc:postgresql://layout-oracle-pg-63069:5432/oracle_flyway_duplicate_subdirectory (PostgreSQL 17.11) | ERROR: Found more than one migration with version 1"
+  },
+  {
+    "tool": "flyway",
+    "version": "Flyway OSS Edition 11.20.3 by Redgate",
+    "case": "duplicate-trailing-zero",
+    "exitCode": 1,
+    "applied": [],
+    "failure": "Database: jdbc:postgresql://layout-oracle-pg-63069:5432/oracle_flyway_duplicate_trailing_zero (PostgreSQL 17.11) | ERROR: Found more than one migration with version 1"
+  },
+  {
+    "tool": "flyway",
+    "version": "Flyway OSS Edition 11.20.3 by Redgate",
+    "case": "lowercase-prefix",
+    "exitCode": 0,
+    "applied": ["V1__a.sql"],
+    "failure": null
+  },
+  {
+    "tool": "flyway",
+    "version": "Flyway OSS Edition 11.20.3 by Redgate",
+    "case": "numeric-order",
+    "exitCode": 0,
+    "applied": ["V1__a.sql", "V1.1__b.sql", "V1_2__c.sql", "V1.10__d.sql", "V2__e.sql", "V10__f.sql"],
+    "failure": null
+  },
+  {
+    "tool": "flyway",
+    "version": "Flyway OSS Edition 11.20.3 by Redgate",
+    "case": "prefix-junk",
+    "exitCode": 0,
+    "applied": ["V1__a.sql"],
+    "failure": null
+  },
+  {
+    "tool": "flyway",
+    "version": "Flyway OSS Edition 11.20.3 by Redgate",
+    "case": "repeatable-duplicate",
+    "exitCode": 1,
+    "applied": [],
+    "failure": "Database: jdbc:postgresql://layout-oracle-pg-63069:5432/oracle_flyway_repeatable_duplicate (PostgreSQL 17.11) | ERROR: Found more than one repeatable migration with description a"
+  },
+  {
+    "tool": "flyway",
+    "version": "Flyway OSS Edition 11.20.3 by Redgate",
+    "case": "repeatable-order",
+    "exitCode": 0,
+    "applied": [
+      "V1__a.sql",
+      "y/R__0.sql",
+      "R__B_upper.sql",
+      "R__a.sql",
+      "R__a_b.sql",
+      "R__b.sql",
+      "x/R__c.sql"
+    ],
+    "failure": null
+  },
+  {
+    "tool": "flyway",
+    "version": "Flyway OSS Edition 11.20.3 by Redgate",
+    "case": "repeatable-separator",
+    "exitCode": 0,
+    "applied": ["V1__a.sql", "R__a_b.sql", "R__a-b.sql", "R__a.b.sql"],
+    "failure": null
+  },
+  {
+    "tool": "flyway",
+    "version": "Flyway OSS Edition 11.20.3 by Redgate",
+    "case": "subdirectory",
+    "exitCode": 0,
+    "applied": ["V1__a.sql", "sub/V2__b.sql"],
+    "failure": null
+  },
+  {
+    "tool": "flyway",
+    "version": "Flyway OSS Edition 11.20.3 by Redgate",
+    "case": "undo",
+    "exitCode": 0,
+    "applied": ["V1__a.sql"],
+    "failure": null
+  },
+  {
+    "tool": "flyway",
+    "version": "Flyway OSS Edition 11.20.3 by Redgate",
+    "case": "uppercase-suffix",
+    "exitCode": 0,
+    "applied": ["V1__a.sql", "V2__b.SQL"],
+    "failure": null
+  }
+]

@@ -1,0 +1,1 @@
+ALTER POLICY "scope_app_project_id_maintenance" ON "items" TO app_maintenance USING (NULLIF(current_setting('app.project_id', true), '') IS NULL) WITH CHECK (NULLIF(current_setting('app.project_id', true), '') IS NULL);
