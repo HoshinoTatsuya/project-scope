@@ -2,7 +2,7 @@ import { randomUUID } from 'node:crypto';
 
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { Client, Pool } from 'pg';
-
+import { dropDatabase } from './drop-database';
 import { PG_TEST_URL } from './pg-test-url';
 import type { ScopeTestDatabase } from './scope-test-database.type';
 
@@ -92,7 +92,7 @@ export const createScopeTestDatabase = async (): Promise<ScopeTestDatabase> => {
       const cleanup = new Client({ connectionString: PG_TEST_URL });
       await cleanup.connect();
       try {
-        await cleanup.query(`DROP DATABASE IF EXISTS ${name} WITH (FORCE)`);
+        await dropDatabase(cleanup, name);
         for (const role of [...extraRoles, ...Object.values(roles)]) {
           await cleanup.query(`DROP ROLE IF EXISTS ${role}`);
         }
